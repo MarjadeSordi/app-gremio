@@ -68,8 +68,7 @@ const showJogos = () => {
       }), []);
     
     
-    
-      
+          
     
         return (
             <div className="CopadoBrasilContainer">
