@@ -7,6 +7,7 @@ export function CopadoBrasil(){
 
     const [jogos, setJogos] = useState([]);
     const [resultado, setResultado] =  useState([]);
+    const Placar = useState ([])
     
     
     const getJogos = async () => {
@@ -73,11 +74,10 @@ const ShowData = () => {
 
 
 const showPlacar = () => {
-    let WritePlacar  = resultado.placar.value.split("-");
- 
-  
-    return [WritePlacar]
-
+    let findPlacar  = resultado.placar.value.split(",");
+    let writePlacar = new Placar(...findPlacar);
+    
+    return writePlacar;
 }
     
     useEffect((() => {
