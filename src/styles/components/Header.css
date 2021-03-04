@@ -1,0 +1,34 @@
+.HeaderContainer{
+    width: 100%;
+    background-color: #4F4F4F;
+    color:#ffffff;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-weight: 500;
+    height: 150px;
+    margin: 0px;
+    display: flex;
+    
+}
+
+.HeaderLogo{
+    width: 100px;
+    margin-left: 50px;
+    
+}
+
+.HeaderConteudo{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.HeaderConteudo p {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.8;
+    letter-spacing: 1px;
+}
