@@ -1,5 +1,4 @@
 import { useState, useEffect} from "react";
-import { Header} from '../components/Header';
 import '../styles/components/CopadoBrasil.css';
 
 
@@ -17,7 +16,7 @@ export function CopadoBrasil(){
             const json = await response.json()
             setJogos(json.data)
             console.log(setJogos)
-          
+            
         
             }
 
@@ -37,27 +36,46 @@ const showJogos = () => {
         for(let resultados of jogos )
     
         {
-            if (resultados.idEquipeVisitante === 1083 || resultados.idEquipeMandante  === 1083 )
+            if (resultados.idEquipeVisitante === 1083 | resultados.idEquipeMandante  === 1083 )
     
-            {    
+            {
+                 
             setResultado([resultados])
-            console.log(setResultado)
+            
              
     
             }
-    
+            
+
 
      
         }    
        
     }
-    
+ 
 
+function exibeNoConsole() {
+        resultado.forEach(item => console.log(item));
+}
+
+exibeNoConsole()
+
+    
+const ShowData = () => {
+
+    let data = new Date(resultado.dataDaPartidaIso)
+    data.getDay();
+    data.getMonth();
+    data.getUTCFullYear();
+
+    return `${data.getDate()}/${data.getMonth() + 1}/${data.getFullYear()}`;
+}
 
     
     
     useEffect((() => {
         getJogos();
+       
         showJogos();
 
        
@@ -79,13 +97,13 @@ const showJogos = () => {
                 <div className='CopadoBrasilJogos'> 
                
                 {resultado && resultado.map((partida) => <div className='CopadoBrasilTimeEsquerda'>
-                 
                  Esquerda 
-
+                 
 
                 {partida.idEquipeMandante}
                 {partida.idCampeonato}
                 {partida.fase}
+                
 
                 </div> )}
                 {resultado && resultado.map((partida) => <div className='CopadoBrasilTimeDireita'>   

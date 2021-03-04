@@ -54,10 +54,9 @@ const show = () => {
 
 
 useEffect((() => {
-    getEquipes();
+    getEquipes();  
     show();
-   
-  }), []);
+ }), []);
 
 
 
@@ -71,7 +70,7 @@ useEffect((() => {
       
         <img src="/gremio-logo.svg" className='HeaderLogo' alt='Bandeira Grêmio' />
           
-          
+
           {time && time.map((gremio) => 
             <div  className='HeaderConteudo'>
               
