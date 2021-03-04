@@ -15,8 +15,8 @@ export function CopadoBrasil(){
         try {
             const response = await fetch('https://cors-anywhere.herokuapp.com/https://futebol.homolog.groundsportech.com/samples/campeonatos/670/partidas.json')
             const json = await response.json()
-            const dados = setJogos(json.data)
-            showJogos(dados)
+            setJogos(json.data)
+            console.log(setJogos)
           
         
             }
@@ -37,22 +37,16 @@ const showJogos = () => {
         for(let resultados of jogos )
     
         {
-            if (resultados.idEquipeVisitante | resultados.idEquipeMandante === 1083)
+            if (resultados.idEquipeVisitante === 1083 || resultados.idEquipeMandante  === 1083 )
     
-            {
-                
-                
+            {    
             setResultado([resultados])
-
+            console.log(setResultado)
              
     
             }
     
-        //let data = resultados.dataDaPartidaIso;
-        //data.getDay();
-        //data.getMonth();
-        //data.getUTCFullYear();
-        //const dataFormat = new Date(data)
+
      
         }    
        
@@ -72,6 +66,7 @@ const showJogos = () => {
     
           
     
+
         return (
             <div className="CopadoBrasilContainer">
                 <div className='CopadoBrasilLayer'></div>
@@ -84,8 +79,13 @@ const showJogos = () => {
                 <div className='CopadoBrasilJogos'> 
                
                 {resultado && resultado.map((partida) => <div className='CopadoBrasilTimeEsquerda'>
+                 
                  Esquerda 
+
+
                 {partida.idEquipeMandante}
+                {partida.idCampeonato}
+                {partida.fase}
 
                 </div> )}
                 {resultado && resultado.map((partida) => <div className='CopadoBrasilTimeDireita'>   

@@ -13,12 +13,9 @@ const getEquipes = async () => {
     try {
         const response = await fetch('https://cors-anywhere.herokuapp.com/https://futebol.homolog.groundsportech.com/samples/campeonatos/670/equipes.json')
         const json = await response.json()
-        const dados = setEquipes(json.data)
-        show(dados)
-        show()
-
+        setEquipes(json.data)
         
-      
+    
       } 
        catch (error) {
        console.log(error)
@@ -42,7 +39,7 @@ const show = () => {
 
 
         setTime([times])
-         
+        
 
 
         }
@@ -73,22 +70,24 @@ useEffect((() => {
         <div className='HeaderContainer'>
       
         <img src="/gremio-logo.svg" className='HeaderLogo' alt='Bandeira Grêmio' />
-               {time && time.map((gremio) => 
+          
+          
+          {time && time.map((gremio) => 
             <div  className='HeaderConteudo'>
               
-
-
             <p> Bem vindos {gremio.torcedorNoPlural}! <br></br>
             O  {gremio.nome} é de {gremio.cidade} - {gremio.estado} </p>
             
-            
+
+
                 
             </div>
+
             )}
 
     
 
-        </div>   
+      </div>   
 
 
 
