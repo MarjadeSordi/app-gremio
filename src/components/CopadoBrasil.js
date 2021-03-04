@@ -73,8 +73,11 @@ const ShowData = () => {
 
 
 const showPlacar = () => {
-    let Writeplacar = resultado.placar.value.split("-")
-    return [Writeplacar]
+    let WritePlacar  = resultado.placar.value.split("-");
+ 
+  
+    return [WritePlacar]
+
 }
     
     useEffect((() => {
