@@ -71,7 +71,11 @@ const ShowData = () => {
     return `${data.getDate()}/${data.getMonth() + 1}/${data.getFullYear()}`;
 }
 
-    
+
+const showPlacar = () => {
+    let Writeplacar = resultado.placar.value.split("-")
+    return [Writeplacar]
+}
     
     useEffect((() => {
         getJogos();
