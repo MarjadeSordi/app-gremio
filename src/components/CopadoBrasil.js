@@ -41,17 +41,18 @@ const showJogos = () => {
     
             {
                 
+                
             setResultado([resultados])
-            console.log(setResultado)
+
              
     
             }
     
-        let data = resultados.dataDaPartidaIso;
-        data.getDay();
-        data.getMonth();
-        data.getUTCFullYear();
-        const dataFormat = new Date(data)
+        //let data = resultados.dataDaPartidaIso;
+        //data.getDay();
+        //data.getMonth();
+        //data.getUTCFullYear();
+        //const dataFormat = new Date(data)
      
         }    
        
@@ -64,6 +65,7 @@ const showJogos = () => {
     useEffect((() => {
         getJogos();
         showJogos();
+
        
       }), []);
     
@@ -72,34 +74,30 @@ const showJogos = () => {
     
         return (
             <div className="CopadoBrasilContainer">
+                <div className='CopadoBrasilLayer'></div>
+
+                    <div class='CopadoBrasilTitulo'>
                 
-                 <p> Copa do Brasil </p>
+                        <p> Copa do Brasil </p>
 
-            <div >
-           
-             <ul className="CopadoBrasilConteudo">
-    
-                {resultado && resultado.map((partida) => 
-                <li key={partida.id}>
-
-                   
-
-                   {partida.fase}                 
-                   
-               </li>
+                     </div>
+                <div className='CopadoBrasilJogos'> 
                
-                )}
-    
-                </ul>
-            
-            </div>   
-    
-    
+                {resultado && resultado.map((partida) => <div className='CopadoBrasilTimeEsquerda'>
+                 Esquerda 
+                {partida.idEquipeMandante}
+
+                </div> )}
+                {resultado && resultado.map((partida) => <div className='CopadoBrasilTimeDireita'>   
+                Direita 
+                {partida.idEquipeVisitante}
               
-        
-            
-    
+                </div>)}
+                   
                
+                </div>
+            
+
                 
                 
             </div>

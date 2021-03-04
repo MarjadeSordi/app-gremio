@@ -69,15 +69,18 @@ useEffect((() => {
     return (
         <div>
 
+
         <div className='HeaderContainer'>
       
-        <img src="/assets/gremio-logo.svg" className='HeaderLogo' alt='Bandeira Grêmio' />
-   
-            {time && time.map((gremio) => 
-            <div key={gremio.id} className='HeaderConteudo'>
+        <img src="/gremio-logo.svg" className='HeaderLogo' alt='Bandeira Grêmio' />
+               {time && time.map((gremio) => 
+            <div  className='HeaderConteudo'>
+              
+
 
             <p> Bem vindos {gremio.torcedorNoPlural}! <br></br>
             O  {gremio.nome} é de {gremio.cidade} - {gremio.estado} </p>
+            
             
                 
             </div>
@@ -88,20 +91,7 @@ useEffect((() => {
         </div>   
 
 
-          <ul>
 
-            {
-            equipes && equipes.map((equipe) =>
-            <li key={equipe.id}> 
-  
-            {equipe.nome}
-
-            </li>)}
-    
-          </ul>
-
-    
-        
             
             
         </div>
