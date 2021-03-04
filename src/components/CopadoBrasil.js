@@ -107,6 +107,7 @@ const showPlacar = () => {
                  Esquerda 
                  
 
+
                 {partida.idEquipeMandante}
                 {partida.idCampeonato}
                 {partida.fase}
@@ -115,6 +116,7 @@ const showPlacar = () => {
                 </div> )}
                 {resultado && resultado.map((partida) => <div className='CopadoBrasilTimeDireita'>   
                 Direita 
+                
                 {partida.idEquipeVisitante}
               
                 </div>)}
