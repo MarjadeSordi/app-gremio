@@ -1,6 +1,7 @@
 import { useState, useEffect} from "react";
 import "../styles/components/Header.css";
 
+
 export function Header(){
 
 
@@ -28,35 +29,23 @@ const getEquipes = async () => {
 const show = () => {
   
   
-
-
-    for(let times of equipes)
-
-    {
-        if (times.nome === 'Grêmio')
-
-        {
-
-
-        setTime([times])
+if(equipes.length) {
         
+        const Gremionoarray = equipes.filter((times) => times.nome === "Grêmio");
 
-
-        }
-
- 
+        setTime(Gremionoarray);  
     }
-
    
 }
 
 
-
-
 useEffect((() => {
     getEquipes();  
-    show();
  }), []);
+
+ useEffect((() => {
+    show();
+  }), [equipes]);
 
 
 
@@ -98,3 +87,4 @@ useEffect((() => {
 
     
             }
+            
