@@ -130,7 +130,7 @@ export function CopadoBrasil(){
 
   const getEstadioEsquerda = () => {
     if (estadio.length) {
-      const estadiodaEsquerda = estadio.filter((estadios) => estadios.id === 6 );
+      const estadiodaEsquerda = estadio.filter((estadios) => estadios.id === 1060 );
       setEstadioEsquerda (estadiodaEsquerda)
       
     }

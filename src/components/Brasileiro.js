@@ -9,6 +9,15 @@ export function Brasileiro(){
     const [JogosBrasileiro, setJogosBrasileiro] = useState([]);
     const [equipesBrasileiro, setEquipesBrasileiro] =useState([]);
     const [estadiosBrasileiro, setEstadiosBrasileiro] =useState([]);
+    const [JogosGremio, setJogosGremio] = useState([]);
+    const [ultimaGremio, setultimaGremio] = useState([]);
+    const [nomeEquipeEsquerda, setnomeEquipeEsquerda] = useState([]);
+    const [nomeEquipeDireita, setnomeEquipeDireita] = useState([]);
+    const [estadioEsquerda, setestadioEsquerda] = useState([])
+    const [estadioDireita, setestadioDireita] = useState([])
+    const [dataBrasileiro, setdataBrasileiro] = useState()
+    const [placarBrasileiro, setplacarBrasileiro] = useState([])
+
 
 
     const getInfoBrasileiro = async () => {
@@ -35,10 +44,102 @@ export function Brasileiro(){
 
     }
 
+    const showJogosBrasileiro = () => {
+        if (JogosBrasileiro.length) {
+            const JogosGremioBrasileiro = JogosBrasileiro.filter((jogosgremio)=> jogosgremio.idEquipeMandante === 1083 || jogosgremio.idEquipeVisitante === 1083);
+            setJogosGremio(JogosGremioBrasileiro)
+            console.log(JogosGremioBrasileiro)
+
+        }
+    }
+
+    const showUltimaPartidaBrasileiro = () => {
+        if (JogosGremio.length) {
+            const UltimaPartidaGremio = JogosGremio.filter((ultimojogo) => ultimojogo.rodada === 38);
+            setultimaGremio(UltimaPartidaGremio)
+            console.log(ultimaGremio)
+
+        }
+    }
+
+    const showequipeEsquerda = () => {
+        if (equipesBrasileiro.length) {
+            const showGremio = equipesBrasileiro.filter((gremio) => gremio.id === 1083);
+            setnomeEquipeEsquerda(showGremio)
+            console.log(showGremio)
+        }
+    }
+
+    const showequipeDireita = () => {
+        if (equipesBrasileiro.length){
+            const showAdversario = equipesBrasileiro.filter((adversario) => adversario.id === 1014);
+            setnomeEquipeDireita(showAdversario)
+            console.log(showAdversario)
+        }
+    }
+  
+
+    const showestadioEsquerda = () => {
+        if (estadiosBrasileiro.length){
+            const showestadioGremio = estadiosBrasileiro.filter((gremio) => gremio.id === 1060);
+            setestadioEsquerda(showestadioGremio)
+        }
+    }
+
+    const showestadioDireita = () => {
+        if (estadiosBrasileiro.length){
+            const showestadioAdversario = estadiosBrasileiro.filter((adversario) => adversario.id === 1399)
+            setestadioDireita(showestadioAdversario)
+        }
+    }
+
+   const getDataBrasileiro = () => {
+       if (ultimaGremio.length) {
+           const dataultimaRodada = ultimaGremio.filter((gremio) => gremio.dataDaPartidaIso)
+           const dataRodada = dataultimaRodada.toString()
+           const dataFormatadaBrasileiro = 
+           moment(dataRodada ).format('LLL')
+           setdataBrasileiro(dataFormatadaBrasileiro)
+       }
+   }
+ 
+
+     
 useEffect((() => {
     getInfoBrasileiro();
   }), []);
+
+  useEffect((() => {
+    showJogosBrasileiro();
+  }), [JogosBrasileiro]);
   
+  useEffect((() => {
+    showUltimaPartidaBrasileiro();
+  }), [JogosGremio]);
+
+  useEffect((() => {
+    showequipeEsquerda();
+  }), [equipesBrasileiro]);
+   
+ 
+  useEffect((() => {
+    showequipeDireita();
+  }), [equipesBrasileiro]);
+
+  useEffect((() => {
+    showestadioEsquerda();
+  }), [estadiosBrasileiro]);
+
+  useEffect((() => {
+    showestadioDireita();
+  }), [estadiosBrasileiro]);
+  
+  useEffect((() => {
+    getDataBrasileiro ();
+  }), [ultimaGremio]);
+ 
+
+
   return(
       <div></div>
   )
