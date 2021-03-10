@@ -16,8 +16,6 @@ export function Brasileiro(){
     const [estadioEsquerda, setestadioEsquerda] = useState([])
     const [estadioDireita, setestadioDireita] = useState([])
     const [dataBrasileiro, setdataBrasileiro] = useState()
-    const [placarBrasileiro, setplacarBrasileiro] = useState([])
-
 
 
     const getInfoBrasileiro = async () => {
@@ -88,18 +86,20 @@ export function Brasileiro(){
 
     const showestadioDireita = () => {
         if (estadiosBrasileiro.length){
-            const showestadioAdversario = estadiosBrasileiro.filter((adversario) => adversario.id === 1399)
+            const showestadioAdversario = estadiosBrasileiro.filter((adversario) => adversario.id === 11)
             setestadioDireita(showestadioAdversario)
         }
     }
 
    const getDataBrasileiro = () => {
        if (ultimaGremio.length) {
-           const dataultimaRodada = ultimaGremio.filter((gremio) => gremio.dataDaPartidaIso)
+           const dataultimaRodada = ultimaGremio.map((gremio) => gremio.dataDaPartidaIso)
            const dataRodada = dataultimaRodada.toString()
+           console.log(dataRodada)
            const dataFormatadaBrasileiro = 
-           moment(dataRodada ).format('LLL')
+           moment(dataRodada).format('LLL')
            setdataBrasileiro(dataFormatadaBrasileiro)
+           console.log(dataFormatadaBrasileiro)
        }
    }
  
@@ -141,8 +141,49 @@ useEffect((() => {
 
 
   return(
-      <div></div>
-  )
+      <div className='BrasileiroContainer'>
+        <div className='BrasileiroLayer'>  </div>
+         <div className='BrasileiroTitulo'> 
+        <h1>  Brasileiro </h1>
+         <span className='BrasileiroData'>{dataBrasileiro}</span> 
+
+
+         {ultimaGremio && ultimaGremio.map((partida) => 
+         <p> <strong> Rodada: </strong> {partida.rodada} <p></p> </p>)}
+         {ultimaGremio && ultimaGremio.map((resultado) => <p> <strong> Time da Casa: </strong> {resultado.placar.golsMandante}  <p> X </p>
+         <strong> Visitante: </strong> {resultado.placar.golsVisitante}</p>)}
+
+         {estadioDireita && estadioDireita.map((partida) => <p><strong> Estádio: </strong> {partida.nome}</p>)}
+
+         </div>
+     
+
+      <div className='BrasileiroEsquerda'> 
+      <img src='/gremio-logo.svg' alt='Bandeira Grêmio' />
+      {nomeEquipeEsquerda && nomeEquipeEsquerda.map((equipe) =>
+      <p> <h1> {equipe.nome}</h1> 
+      <p> Cidade: {equipe.cidade}  - {equipe.estado} </p> <p> </p>
+      <p> Torcida: {equipe.torcedorNoPlural} </p></p>
+      )}
+      {estadioEsquerda && estadioEsquerda.map((equipe) => 
+      <p><strong> Estádio: </strong> {equipe.nome}</p>)}
+      
+      
+      </div>
+      <div className='BrasileiroDireita'> 
+      <img src='/goias.svg' alt="Bandeira do Goais" />
+      {nomeEquipeDireita && nomeEquipeDireita.map((equipe) => 
+      <p> <h1> {equipe.nome}</h1>
+      <p> Cidade: {equipe.cidade}  - {equipe.estado} </p> <p> </p>
+      <p> Torcida: {equipe.torcedorNoPlural}</p>
+      </p>)}
+      {estadioDireita && estadioDireita.map((equipe) => 
+      <p> <strong> Estádio: </strong> {equipe.nome}</p>)}
+      </div>
+      
+      
+      </div>
+  ) 
 
 }
 

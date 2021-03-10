@@ -1,0 +1,119 @@
+.BrasileiroContainer{
+    height: 480px;
+    width: 100%;
+    background-image: url('/src/assets/campo3.jpg');
+    background-position: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    z-index: 1001;
+    
+}
+
+.BrasileiroContainer h1{
+    font-size: 24px;
+    margin-top: 80px;
+    margin-left: 40px;
+    text-transform: uppercase;
+    
+}
+
+.BrasileiroLayer{
+    height: 100%;
+    width: 100%;
+    background: #C0C0C0;
+    opacity: 0.6;
+    position: absolute
+}
+
+.BrasileiroTitulo {
+    z-index: 3;
+    position: absolute;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    letter-spacing: 1px;
+    font-size: 14px;
+    margin-left: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    
+}
+
+
+.BrasileiroContainer p {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-size: 18px;
+    margin: 5%;
+  
+}
+
+.BrasileiroEsquerda {
+    position: absolute;
+    height: 300px;
+    width: 300px;
+    margin-left: 1000px;
+    margin-top: 100px;
+    background-color: rgba(24, 22, 22, 0.178);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    
+
+}
+
+.BrasileiroEsquerda h1 {
+    font-size: 20px;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.BrasileiroEsquerda p {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-size: 16px;
+    margin: 3%;
+}
+
+.BrasileiroEsquerda img {
+    height: 100px;
+    align-items: center;
+}
+
+.BrasileiroDireita {
+    position: absolute;
+    height: 300px;
+    width: 300px;
+    margin-left: 1400px;
+    margin-top: 100px;
+    background-color: rgba(24, 22, 22, 0.178);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.BrasileiroDireita h1 {
+    font-size: 20px;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.BrasileiroDireita p{
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-size: 16px;
+    margin: 3%;
+}
+
+.BrasileiroDireita img {
+    height: 100px;
+
+}
+
+.BrasileiroData {
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 20px;
+}
