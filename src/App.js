@@ -1,5 +1,8 @@
 import { Header } from '../src/components/Header';
 import {CopadoBrasil} from '../src/components/CopadoBrasil';
+import { Brasileiro } from './components/Brasileiro';
+
+
 
 
 function App() {
@@ -7,6 +10,7 @@ function App() {
     <div> 
       <Header />
      <CopadoBrasil />
+     <Brasileiro />
 
 </div>
   );

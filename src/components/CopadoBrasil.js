@@ -1,6 +1,7 @@
 import { useState, useEffect} from "react";
 import '../styles/components/CopadoBrasil.css';
-
+import moment from 'moment';
+import 'moment/locale/pt-br';
 
 
 export function CopadoBrasil(){
@@ -13,6 +14,13 @@ export function CopadoBrasil(){
     const [timenaFinalGremio, setTimenaFinalGremio ] = useState([])
     const [timenaFinalAdversario, setTimenaFinalAdversario] = useState([])
     const [getPlacar, setPlacar] = useState([])
+    const [getSegundoPlacar, setSegundoPlacar] = useState([])
+    const [dataEsquerda, setDataesquerda] = useState()
+    const [dataDireita, setDatadireita] = useState()
+    const [estadio, setEstadio] = useState([])
+    const [estadioEsquerda, setEstadioEsquerda] = useState([])
+    const [estadioDireita, setEstadioDireita] = useState([])
+
 
     const getJogos = async () => {
     
@@ -24,6 +32,10 @@ export function CopadoBrasil(){
             const equipe = await fetch('https://cors-anywhere.herokuapp.com/https://futebol.homolog.groundsportech.com/samples/campeonatos/670/equipes.json')
             const jsonequipe = await equipe.json()
             setNomeEquipe(jsonequipe.data)
+
+            const estadio = await fetch('https://cors-anywhere.herokuapp.com/https://futebol.homolog.groundsportech.com/samples/estadios.json')
+            const jsonestadio = await estadio.json()
+            setEstadio(jsonestadio.data)
           
             }
 
@@ -51,6 +63,7 @@ export function CopadoBrasil(){
 
             const JogoFinal = resultado.filter((jogofinal) => jogofinal.fase === 'Semifinal')
             setFinal(JogoFinal);
+            console.log(final)
     
     }
 }  
@@ -74,17 +87,62 @@ export function CopadoBrasil(){
   }
 
 }
-
-
-   const GetPlacarTime = () => {
+  const GetPlacarTime = () => {
         if (final.length) {
-            const placares = final.filter((placartime) => placartime.idequipeMandante === 1083 || placartime.placar.id === 143451 );
+            const placares = final.filter((placartime) =>  placartime.placar.id === 143451 );
             setPlacar(placares)
-            console.log(placares);
+            }
+ }
+
+  const GetPlacarSegundoTime = () => {
+      if (final.length) {
+          const segundoPlacar = final.filter((placartimedois) =>  placartimedois.placar.id === 144036 );
+          setSegundoPlacar(segundoPlacar)
         }
+      }
+  
+
+  const getData = () => {
+    if (getPlacar.length) {
+
+        const getdataEsquerda = getPlacar.map((diadojogo) => diadojogo.dataDaPartidaIso);
+        const getEsquerda = getdataEsquerda.toString()
+         
+        const  getDataFormatada = 
+        moment(getEsquerda).format('LLL')
+        setDataesquerda(getDataFormatada)
+              
+       }
+  }
+
+  const getDataDireita = () => {
+    if (getSegundoPlacar.length) {
+
+        const getdataDireita = getSegundoPlacar.map((diadojogo) => diadojogo.dataDaPartidaIso);
+        const getDireita = getdataDireita.toString()
+         
+        const  getDatadireitaFormatada =
+        moment(getDireita).format('LLL')
+        setDatadireita(getDatadireitaFormatada)
+        console.log(getDatadireitaFormatada)   
+       }
+  }
+
+  const getEstadioEsquerda = () => {
+    if (estadio.length) {
+      const estadiodaEsquerda = estadio.filter((estadios) => estadios.id === 6 );
+      setEstadioEsquerda (estadiodaEsquerda)
+      
     }
+  }
 
+  const getEstadioDireita = () => {
+    if (estadio.length) {
+      const estadiodaDireita = estadio.filter((estadios) => estadios.id === 8 );
+      setEstadioDireita (estadiodaDireita)
 
+    }
+  }
        
    
     useEffect((() => {
@@ -110,6 +168,28 @@ export function CopadoBrasil(){
           useEffect((() => {
             GetPlacarTime();
           }), [final]);
+
+          useEffect((() => {
+            GetPlacarSegundoTime();
+          }), [final]);
+      
+
+          useEffect((() => {
+           getData();
+          }), [getPlacar]);
+
+          useEffect((() => {
+            getDataDireita();
+           }), [getSegundoPlacar]);
+          
+          useEffect((() => {
+            getEstadioEsquerda();
+          }), [estadio]);
+
+          useEffect((() => {
+            getEstadioDireita();
+          }), [estadio]);
+        
             
           
             
@@ -119,10 +199,34 @@ export function CopadoBrasil(){
                 <div className='CopadoBrasilLayer'></div>
 
                     <div class='CopadoBrasilTitulo'>
-                
-                        <p> Copa do Brasil </p>
+                           <p> <h1> Copa do Brasil</h1> </p> 
+                        
+                            <span className='CopadoBrasilData'>{dataEsquerda}</span> 
 
-                     </div>
+                            {getPlacar && getPlacar.map((partida) => 
+                            <p> <strong> Fase: </strong> {partida.fase} <p></p>
+                               <strong> Placar: </strong> <p></p> 
+                                Time da Casa:  {partida.placar.golsMandante} <p> X </p>
+                                Visitante: {partida.placar.golsVisitante}</p> )}
+                                {estadioEsquerda && estadioEsquerda.map((partida) =>
+                                <p> <strong>  Estádio:</strong>  {partida.nome}  </p>)}     
+                            
+                                <span className='CopadoBrasilData'>{dataDireita}</span> 
+
+                                {getSegundoPlacar && getSegundoPlacar.map((partida) => 
+                                <p> <strong> Fase: </strong> {partida.fase} <p></p>
+                                  <strong> Placar: </strong> <p></p> 
+                                  Time da Casa:  {partida.placar.golsMandante} <p> X </p>
+                                  Visitante: {partida.placar.golsVisitante}
+                                </p> )}
+
+                                {estadioDireita && estadioDireita.map((partida) =>
+                                <p> <strong>  Estádio:</strong>  {partida.nome}  </p>)}
+
+                            {}
+
+                   </div>
+
                 <div className='CopadoBrasilJogos'> 
 
                 <div className='CopadoBrasilJogoscapsula'> 
@@ -130,37 +234,42 @@ export function CopadoBrasil(){
                 <div className='CopadoBrasilTimeEsquerda'>
 
                 {timenaFinalGremio && timenaFinalGremio.map((partida) =>
-                <p className='CopadoBrasilDestaque'>  Time da Casa: {partida.nome} </p>)} 
+                <h1 className='CopadoBrasilDestaque'> Time da Casa: {partida.nome} - {partida.sigla}</h1>
+                                     
+                )} 
 
-                {timenaFinalAdversario && timenaFinalAdversario.map((partida) =>
-                <p className='CopadoBrasilDestaque'> Visitante: {partida.nome} </p>)}
-              
+                <img src="/gremio-logo.svg" alt='Bandeira do Grêmio' />
+           
+                {timenaFinalGremio && timenaFinalGremio.map((partida) => 
+                <p> Cidade de Origem: {partida.cidade} - {partida.estado} <p></p>
+                Torcida: {partida.torcedorNoPlural}</p> )}   
 
-                {getPlacar && getPlacar.map((partida) => 
-                <p> Fase: {partida.fase} <p></p>
-                Placar time da Casa:  {partida.placar.golsMandante} 
-                <p></p>
-                Placar visitante: {partida.placar.golsVisitante}</p> )}
-
-
+                {estadioEsquerda && estadioEsquerda.map((partida) =>
+                <p> <strong>  Estádio:</strong>  {partida.nome}  </p>)}     
                 
+                 
+                
+                          
                 </div> 
                 </div>
                 
                 <div className='CopadoBrasilJogoscapsula'>
 
-                {final && final.map((partida) => 
-
                 <div className='CopadoBrasilTimeDireita'>   
-                Direita 
-                {partida.idEquipeMandante}
-                {partida.fase}
-              
-                </div>
-                
-                )}
-                   
+                {timenaFinalAdversario && timenaFinalAdversario.map((partida) =>
+                <h1 className='CopadoBrasilDestaque'> Visitante: {partida.nome} - {partida.sigla}</h1>)}
+                 
+                <img src="/logoatletico.png" alt='Bandeira do Atlético' />
                
+
+                {timenaFinalAdversario && timenaFinalAdversario.map((partida) =>  
+                <p> Cidade de Origem: {partida.cidade} - {partida.estado} <p></p>
+                Torcida: {partida.torcedorNoPlural}</p>  )}
+                
+                {estadioDireita && estadioDireita.map((partida) =>
+                <p> <strong>  Estádio:</strong>  {partida.nome}  </p>)}
+                   
+                </div>
                 </div>
             
 
